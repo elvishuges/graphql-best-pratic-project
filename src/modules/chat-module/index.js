@@ -1,37 +1,16 @@
 const { GraphQLModule } = require('@graphql-modules/core') ;
 const gql  = require('graphql-tag');
+const typeDefs = require('./schema')
+const db = require('./../../db')
 
 const ChatModule = new GraphQLModule({
-  typeDefs : gql`
-    # Query é declarada novamente, adicionando apenas a parte relevante
-    type Query {
-      myChats: [Chat]
-    }
-    # User é declarado novamente, estendendo qualquer outro tipo de User carregado no appModule
-    type User {
-      chats: [Chat]
-    }
-    type Chat {
-      id: ID!
-      users: [User]
-      messages: [ChatMessage]
-    }
-    type ChatMessage {
-      id: ID!
-      content: String!
-      user: User!
-    }
-  `,
+  typeDefs,
   resolvers : {
     Query: {
-       myChats: (root, args, { getChats, currentUser }) => getChats(currentUser),
-    },
-    User: {
-      // Este módulo implementa apenas a parte do `User` que ele adiciona
-      chats: (user, args, { getChats }) => getChats(user),
+       myChats: (root) =>
+           db.chats // add sql query aqui.
     },
   }
 });
-
 
 module.exports = { ChatModule };

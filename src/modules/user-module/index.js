@@ -1,31 +1,16 @@
 const { GraphQLModule } = require ('@graphql-modules/core');
 const gql = require('graphql-tag') ;
+const typeDefs = require('./schema.js') ;
+const db = require("./../../db");
+
+
  const UserModule = new GraphQLModule({
-  typeDefs: gql`
-    type Query {
-      me(id:ID!): User
-    }
-    # Este é o User inicial, com apenas o mínimo de um objeto de usuário
-    type User {
-      id: ID!
-      username: String!
-      email: String!
-    }
-  `,
+  typeDefs,
   resolvers: {
     Query: {
-       me: (root) => {
-        return {
-          id: id,
-          username: 'jhon',
-          email:"elvishuges@hotmail.com"
-        };
+       me: (root,{ id }) => {
+          return db.users.find(user => user.id == id); // pderia ser uma consulta sql.
        },
-    },
-    User: {
-      id: user => user._id,
-      username: user => user.username,
-      email: user => user.email.address,
     },
   },
 });
