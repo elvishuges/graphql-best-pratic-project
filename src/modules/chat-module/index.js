@@ -1,16 +1,11 @@
 const { GraphQLModule } = require('@graphql-modules/core') ;
 const gql  = require('graphql-tag');
 const typeDefs = require('./schema')
-const db = require('./../../db')
+const resolvers = require('./resolvers')
 
 const ChatModule = new GraphQLModule({
   typeDefs,
-  resolvers : {
-    Query: {
-       myChats: (root) =>
-           db.chats // add sql query aqui.
-    },
-  }
+  resolvers
 });
 
 module.exports = { ChatModule };

@@ -10,7 +10,6 @@ exports.login = function (username, password) {
         con.query(sql, function (err, result) {
             console.log("ERRO: " + err);
             if (result[0] != undefined) {
-                console.log("Aqui!");
                 result[0].funcao = "user"
                 fulfill(result[0]);
             } else {
