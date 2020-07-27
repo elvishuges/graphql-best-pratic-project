@@ -9,7 +9,6 @@ const resolvers = {
       users: (chat) =>  db.users.filter((user)=> user.chat_id == chat.id ),
       messages:(chat)=>  db.chatMessages.filter((chatMessage)=> chat.id == chatMessage.chat_id )
     },
-
   }
 
   module.exports = resolvers

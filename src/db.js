@@ -1,9 +1,9 @@
  let db = {
      users: [
-        { id: 1, chat_id:1 ,username: "Elvis Huges", email: "elvishuges@gmail.com", age: 27 },
-        { id: 2, chat_id:1 ,username: "Jaque Gonçalves", email: "jaqueline@gmail.com", age: 28 },
-        { id: 3, chat_id:2 ,username: "Eveline Huges", email: "Eveline@gmail.com", age: 24 },
-        { id: 4, chat_id:2 ,username: "Emille Huges", email: "Emille@gmail.com", age: 32 }
+        { id: 1, chat_id:1 ,username: "Elvis Huges", email: "elvishuges@gmail.com", senha:"123", age: 27},
+        { id: 2, chat_id:1 ,username: "Jaque Gonçalves", email: "jaqueline@gmail.com", senha:"123", age: 28 },
+        { id: 3, chat_id:2 ,username: "Eveline Huges", email: "Eveline@gmail.com", senha:"123", age: 24 },
+        { id: 4, chat_id:2 ,username: "Emille Huges", email: "Emille@gmail.com", senha:"123", age: 32 }
      ],
 
     chats: [

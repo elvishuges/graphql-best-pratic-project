@@ -4,13 +4,21 @@ const typeDefs = gql`
 
     type Query {
         me(id:ID!): User,
-      }
-      type User {
+    }
+    type Mutation {
+      login(email: String, senha: String): AuthPayload
+    }
+    type User {
             id: ID
             username: String
-            email: String
+            email: String,
+            senha: String
+     }
+     type AuthPayload {
+        token: String
+        user: User
       }
-      `;
+     `;
 
 
 module.exports = typeDefs;
