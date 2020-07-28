@@ -1,7 +1,8 @@
 const db = require("./../../db");
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const { APP_SECRET, getUserId } = require('./../../utils')
+const userDao = require('./../../daos/userDao')
+const { APP_SECRET, getUser } = require('./../../utils')
 
 const resolvers = {
     Query: {
@@ -11,12 +12,24 @@ const resolvers = {
     },
     Mutation: {
         login: async (_,{ email,senha }) =>  {
-            console.log(email);
-            const token = jwt.sign({ userId: email }, APP_SECRET)
-            const user = db.users.find(user=>
-               user.email == email
-            )
-            return { token,user }
+
+            const login = userDao.login(email,senha)
+
+            return login.then((result)=>{
+                if(result){
+                    const token = jwt.sign({ user: user }, APP_SECRET)
+                    return { token, user }
+                 }
+            }).catch(()=>{
+                throw new Error('No such user found')
+            })
+
+
+        },
+
+        post: async (parent, args, ctx, req) =>{
+            const user  = getUser(req.session)
+            return user
         }
     }
 }

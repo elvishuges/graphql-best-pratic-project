@@ -7,6 +7,7 @@ const typeDefs = gql`
     }
     type Mutation {
       login(email: String, senha: String): AuthPayload
+      post(email: String!, senha: String!): Link!
     }
     type User {
             id: ID
@@ -14,6 +15,13 @@ const typeDefs = gql`
             email: String,
             senha: String
      }
+
+     type Link {
+            id: ID
+            description: String
+            url: String!
+            postedBy: User
+      }
      type AuthPayload {
         token: String
         user: User
